@@ -14,7 +14,6 @@ Copyright (c) 2007,2010 Open Geospatial Consortium.
 To obtain additional rights of use, visit http://www.opengeospatial.org/legal/ .
 		</documentation>
 	</annotation>
-	<include schemaLocation="gml.xsd"/>
 	<simpleType name="NilReasonType">
 		<annotation>
 			<documentation>gml:NilReasonType defines a content model that allows recording of an explanation for a void value or other exception.
@@ -169,61 +168,61 @@ Since it is based on the XML Schema string type, CoordinatesType may be used in 
 		<annotation>
 			<documentation>A type for a list of values of the respective simple type.</documentation>
 		</annotation>
-		<list itemType="boolean"/>
+		<list itemType="string"/>
 	</simpleType>
 	<simpleType name="doubleList">
 		<annotation>
 			<documentation>A type for a list of values of the respective simple type.</documentation>
 		</annotation>
-		<list itemType="double"/>
+		<list itemType="string"/>
 	</simpleType>
 	<simpleType name="integerList">
 		<annotation>
 			<documentation>A type for a list of values of the respective simple type.</documentation>
 		</annotation>
-		<list itemType="integer"/>
+		<list itemType="string"/>
 	</simpleType>
 	<simpleType name="NameList">
 		<annotation>
 			<documentation>A type for a list of values of the respective simple type.</documentation>
 		</annotation>
-		<list itemType="Name"/>
+		<list itemType="string"/>
 	</simpleType>
 	<simpleType name="NCNameList">
 		<annotation>
 			<documentation>A type for a list of values of the respective simple type.</documentation>
 		</annotation>
-		<list itemType="NCName"/>
+		<list itemType="string"/>
 	</simpleType>
 	<simpleType name="QNameList">
 		<annotation>
 			<documentation>A type for a list of values of the respective simple type.</documentation>
 		</annotation>
-		<list itemType="QName"/>
+		<list itemType="string"/>
 	</simpleType>
 	<simpleType name="booleanOrNilReasonList">
 		<annotation>
 			<documentation>A type for a list of values of the respective simple type.</documentation>
 		</annotation>
-		<list itemType="gml:booleanOrNilReason"/>
+		<list itemType="string"/>
 	</simpleType>
 	<simpleType name="NameOrNilReasonList">
 		<annotation>
 			<documentation>A type for a list of values of the respective simple type.</documentation>
 		</annotation>
-		<list itemType="gml:NameOrNilReason"/>
+		<list itemType="string"/>
 	</simpleType>
 	<simpleType name="doubleOrNilReasonList">
 		<annotation>
 			<documentation>A type for a list of values of the respective simple type.</documentation>
 		</annotation>
-		<list itemType="gml:doubleOrNilReason"/>
+		<list itemType="string"/>
 	</simpleType>
 	<simpleType name="integerOrNilReasonList">
 		<annotation>
 			<documentation>A type for a list of values of the respective simple type.</documentation>
 		</annotation>
-		<list itemType="gml:integerOrNilReason"/>
+		<list itemType="string"/>
 	</simpleType>
 	<complexType name="CodeListType">
 		<annotation>

@@ -11,7 +11,6 @@ Copyright (c) 2007,2010 Open Geospatial Consortium.
 To obtain additional rights of use, visit http://www.opengeospatial.org/legal/ .
 		</documentation>
 	</annotation>
-	<include schemaLocation="gml.xsd"/>
 	<include schemaLocation="feature.xsd"/>
 	<include schemaLocation="direction.xsd"/>
 	<element name="dataSource" type="gml:StringOrRefType">

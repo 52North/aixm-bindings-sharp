@@ -9,7 +9,18 @@
 			To obtain additional rights of use, visit http://www.opengeospatial.org/legal/ .
 		</documentation>
 	</annotation>
-	<include schemaLocation="gml.xsd"/>
+
+  <!--
+  <include schemaLocation="gml.xsd"/>-->
+
+  <include schemaLocation="dynamicFeature.xsd"/>
+  <include schemaLocation="topology.xsd"/>
+  <include schemaLocation="coverage.xsd"/>
+  <include schemaLocation="coordinateReferenceSystems.xsd"/>
+  <include schemaLocation="observation.xsd"/>
+  <include schemaLocation="temporalReferenceSystems.xsd"/>
+  
+  
 	<element name="Null" type="gml:NilReasonType">
 		<annotation>
 			<appinfo>deprecated</appinfo>
