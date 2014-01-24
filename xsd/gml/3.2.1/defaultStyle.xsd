@@ -11,7 +11,6 @@
 	<!-- ==============================================================
        includes and imports
 	============================================================== -->
-	<include schemaLocation="gml.xsd"/>
 	<include schemaLocation="measures.xsd"/>
 	<import namespace="http://www.w3.org/2001/SMIL20/" schemaLocation="http://schemas.opengis.net/gml/3.1.1/smil/smil20.xsd"/>
 	<!-- ==============================================================
