@@ -39,15 +39,15 @@ using aero.aixm.v51;
 
 namespace aixm_bindings_sharp
 {
-	class Roundtrip
+	class TimePeriodTryout
 	{
-		public static void Main(string[] args)
+		public static void test(string[] args)
 		{
 			if (args == null || args.Length != 2) {
 				throw new Exception("Input and Output file path's required.");
 			}
 			
-			Console.WriteLine("Navaid roundtripping...!");
+			Console.WriteLine("TimePeriod roundtripping...!");
 			
 			String content = readFileContents(args[0]);
 			
@@ -60,9 +60,8 @@ namespace aixm_bindings_sharp
 		}
 		
 		private static String roundtrip(String input) {
-			XmlSerializer deserial = new XmlSerializer(typeof(NavaidType));
-			NavaidType obj = (NavaidType) deserial.Deserialize(new StringReader(input));
-			NavaidTimeSlicePropertyType ts = obj.timeSlice[0] as NavaidTimeSlicePropertyType;
+			XmlSerializer deserial = new XmlSerializer(typeof(TimePeriodType));
+			TimePeriodType obj = (TimePeriodType) deserial.Deserialize(new StringReader(input));
 			
 			StringWriter textWriter = new StringWriter();
 

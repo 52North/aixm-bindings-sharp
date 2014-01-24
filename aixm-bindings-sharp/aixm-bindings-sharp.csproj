@@ -63,6 +63,7 @@
     <Compile Include="AIXM_Features.cs" />
     <Compile Include="Roundtrip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimePeriodTryout.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
