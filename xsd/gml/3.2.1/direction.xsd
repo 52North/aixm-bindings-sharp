@@ -10,7 +10,6 @@ Copyright (c) 2007,2010 Open Geospatial Consortium.
 To obtain additional rights of use, visit http://www.opengeospatial.org/legal/ .
 		</documentation>
 	</annotation>
-	<include schemaLocation="gml.xsd"/>
 	<include schemaLocation="geometryBasic0d1d.xsd"/>
 	<element name="direction" type="gml:DirectionPropertyType">
 		<annotation>
