@@ -32,50 +32,70 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 
 using aero.aixm.v51;
+using System.Diagnostics;
 
 namespace aixm_bindings_sharp
 {
 	class Roundtrip
 	{
+
 		public static void Main(string[] args)
 		{
-			if (args == null || args.Length != 2) {
+            TimePeriodTryout tpt = null;
+            string fileInput;
+            string fileOutput;
+			if (args == null || args.Length == 0) 
+            {
 				throw new Exception("Input and Output file path's required.");
 			}
+            else
+            {
+                if (args.Length == 1)
+                {
+                    if (Directory.Exists(args[0]))
+                    {
+                        fileInput = args[0] + "\\"+ "navaid.xml";
+                        fileOutput = args[0] + "\\" + "navaid-re-cs.xml";
+
+                        tpt = new TimePeriodTryout(args[0]);
+                    }
+                    else
+                    {
+                        throw new Exception("Input path is not a valid directory.");
+                    }
+                }
+                else if (args.Length == 2)
+                {
+                    fileInput = args[0];
+                    fileOutput = args[1];
+                }
+                else
+                {
+                    throw new Exception("Input path is not a valid directory.");
+                }
+            }
 			
 			Console.WriteLine("Navaid roundtripping...!");
-			
-			String content = readFileContents(args[0]);
-			
-			String rt = roundtrip(content);
-			
-			writeFileContents(rt, args[1]);
-			
-			Console.WriteLine("Rondtrip complete!");
-			Console.ReadLine();
-		}
-		
-		private static String roundtrip(String input) {
-			XmlSerializer deserial = new XmlSerializer(typeof(NavaidType));
-			NavaidType obj = (NavaidType) deserial.Deserialize(new StringReader(input));
-			NavaidTimeSlicePropertyType ts = obj.timeSlice[0] as NavaidTimeSlicePropertyType;
-			
-			StringWriter textWriter = new StringWriter();
 
-			deserial.Serialize(textWriter, obj);
-			return textWriter.ToString();
+            Stopwatch sw = new Stopwatch();
+            
+            GenericRoundtrip<NavaidType> rt = new GenericRoundtrip<NavaidType>();
+            rt.DoRoundtrip(fileInput, fileOutput);
+			
+			Console.WriteLine("Rondtrip complete! Took {0} milliseconds.", rt.ElapsedTime);
+            Thread.Sleep(2000);
+
+            if (tpt != null)
+            {
+                tpt.Test();
+            }
 		}
 		
-		private static String readFileContents(String path) {
-			return File.ReadAllText(path);
-		}
-		
-		private static void writeFileContents(String content, String path) {
-			File.WriteAllText(path, content);
-		}
-	}
+
+    }
 }

@@ -32,54 +32,68 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 
 using aero.aixm.v51;
-using System.Threading;
+using System.Diagnostics;
 
 namespace aixm_bindings_sharp
 {
-	class TimePeriodTryout
+	class GenericRoundtrip<T>
 	{
-        private string path;
-
-        public TimePeriodTryout(string p)
-        {
-            this.path = p;
-        }
-
-		public void Test()
-		{
-            if (!Directory.Exists(this.path))
-            {
-                return;
-            }
-
-            string input = this.path + "\\timePeriod.xml";
-            string output = this.path + "\\timePeriod-re-cs.xml";
-
-			Console.WriteLine("TimePeriod roundtripping...!");
-			
-			GenericRoundtrip<TimePeriodType> rt = new GenericRoundtrip<TimePeriodType>();
-			rt.DoRoundtrip(input, output);
-			
-			Console.WriteLine("Rondtrip complete! Took {0} ms", rt.ElapsedTime);
-            Thread.Sleep(2000);
-            
-
-            string inputSlice = this.path + "\\navaidTimeSlice.xml";
-            string outputSlice = this.path + "\\navaidTimeSlice-re-cs.xml";
-
-			Console.WriteLine("navaidTimeSlice roundtripping...!");
-			
-			GenericRoundtrip<NavaidTimeSliceType> rt2 = new GenericRoundtrip<NavaidTimeSliceType>();
-			rt2.DoRoundtrip(inputSlice, outputSlice);
-			
-			Console.WriteLine("Rondtrip complete! Took {0} ms", rt2.ElapsedTime);
-            Thread.Sleep(2000);
+		private long elapsedTime;
+		
+		public long ElapsedTime {
+			get { return elapsedTime; }
+			set { elapsedTime = value; }
 		}
 		
+		public GenericRoundtrip()
+		{
+			//
+		}
 
+		public string DoRoundtrip(string inputPath)
+		{
+			return DoRoundtrip(inputPath, null);
+		}
+		
+		public string DoRoundtrip(string inputPath, string outputPath)
+		{
+			string input = ReadFileContents(inputPath);
+			Stopwatch sw = new Stopwatch();
+			sw.Start();
+			XmlSerializer deserial = new XmlSerializer(typeof(T));
+			T obj = (T) deserial.Deserialize(new StringReader(input));
+			
+			StringWriter textWriter = new StringWriter();
+
+			deserial.Serialize(textWriter, obj);
+			sw.Stop();
+			this.elapsedTime = sw.ElapsedMilliseconds;
+			
+			string result = textWriter.ToString();
+			
+			if (outputPath != null)
+			{
+				WriteFileContents(result, outputPath);
+			}
+			
+			return result;
+		}
+		
+		private static string ReadFileContents(string path)
+		{
+			return File.ReadAllText(path);
+		}
+		
+		private static void WriteFileContents(string content, string path)
+		{
+			File.WriteAllText(path, content);
+		}
+
+		
     }
 }
