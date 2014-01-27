@@ -44,6 +44,7 @@ namespace aixm_bindings_sharp
 	class GenericRoundtrip<T>
 	{
 		private long elapsedTime;
+		private XmlSerializer deserial;
 		
 		public long ElapsedTime {
 			get { return elapsedTime; }
@@ -52,7 +53,7 @@ namespace aixm_bindings_sharp
 		
 		public GenericRoundtrip()
 		{
-			//
+			deserial = new XmlSerializer(typeof(T));
 		}
 
 		public string DoRoundtrip(string inputPath)
@@ -63,18 +64,8 @@ namespace aixm_bindings_sharp
 		public string DoRoundtrip(string inputPath, string outputPath)
 		{
 			string input = ReadFileContents(inputPath);
-			Stopwatch sw = new Stopwatch();
-			sw.Start();
-			XmlSerializer deserial = new XmlSerializer(typeof(T));
-			T obj = (T) deserial.Deserialize(new StringReader(input));
-			
-			StringWriter textWriter = new StringWriter();
 
-			deserial.Serialize(textWriter, obj);
-			sw.Stop();
-			this.elapsedTime = sw.ElapsedMilliseconds;
-			
-			string result = textWriter.ToString();
+			string result = Execute(input);
 			
 			if (outputPath != null)
 			{
@@ -84,12 +75,41 @@ namespace aixm_bindings_sharp
 			return result;
 		}
 		
-		private static string ReadFileContents(string path)
+		public string Execute(string input)
+		{
+			Stopwatch sw = new Stopwatch();
+			sw.Start();
+
+			T obj = this.DeSerialize(input);
+			
+			string result = this.Serialize(obj);
+			sw.Stop();
+			this.elapsedTime = sw.ElapsedMilliseconds;
+			
+			return result;
+		}
+		
+		public T DeSerialize(string input)
+		{
+			return (T) deserial.Deserialize(new StringReader(input));
+		}
+		
+		public string Serialize(T obj)
+		{
+			StringWriter textWriter = new StringWriter();
+
+			deserial.Serialize(textWriter, obj);
+			
+			string result = textWriter.ToString();
+			return result;
+		}
+		
+		public static string ReadFileContents(string path)
 		{
 			return File.ReadAllText(path);
 		}
 		
-		private static void WriteFileContents(string content, string path)
+		public static void WriteFileContents(string content, string path)
 		{
 			File.WriteAllText(path, content);
 		}

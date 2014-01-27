@@ -68,16 +68,37 @@ namespace aixm_bindings_sharp
             Thread.Sleep(2000);
             
 
-            string inputSlice = this.path + "\\navaidTimeSlice.xml";
-            string outputSlice = this.path + "\\navaidTimeSlice-re-cs.xml";
+            string inputSlice = this.path + "\\airportHeliportTimeSlice.xml";
+            string outputSlice = this.path + "\\airportHeliportTimeSlice-re-cs.xml";
 
 			Console.WriteLine("navaidTimeSlice roundtripping...!");
 			
-			GenericRoundtrip<NavaidTimeSliceType> rt2 = new GenericRoundtrip<NavaidTimeSliceType>();
+			GenericRoundtrip<AirportHeliportTimeSliceType> rt2 = new GenericRoundtrip<AirportHeliportTimeSliceType>();
 			rt2.DoRoundtrip(inputSlice, outputSlice);
 			
 			Console.WriteLine("Rondtrip complete! Took {0} ms", rt2.ElapsedTime);
             Thread.Sleep(2000);
+            
+            ExecuteProgrammaticDataSerialization();
+		}
+		
+		private void ExecuteProgrammaticDataSerialization()
+		{
+			NavaidTimeSliceType type = new NavaidTimeSliceType();
+			type.interpretation = aero.aixm.v51.interpretation.TEMPDELTA;
+			type.validTime = new TimePrimitivePropertyType();
+			TimePeriodType tp = new TimePeriodType();
+			
+			TimePositionType position = new TimePositionType();
+			position.Value = "2011-01-13T12:00:00.000Z";
+			tp.Item = position;
+			tp.Item1 = position;
+			
+			type.validTime.AbstractTimePrimitive = tp;
+			
+			GenericRoundtrip<NavaidTimeSliceType> gr = new GenericRoundtrip<NavaidTimeSliceType>();
+			string result = gr.Serialize(type);
+			GenericRoundtrip<NavaidTimeSliceType>.WriteFileContents(result, this.path +"\\programmaticTimePeriod-re-cs.xml");
 		}
 		
 
