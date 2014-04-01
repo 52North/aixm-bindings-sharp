@@ -41,7 +41,7 @@ using System.Diagnostics;
 
 namespace aixm_bindings_sharp
 {
-	class GenericRoundtrip<T>
+	class GenericRoundtrip<T> : IGenericRoundtrip
 	{
 		private long elapsedTime;
 		private XmlSerializer deserial;

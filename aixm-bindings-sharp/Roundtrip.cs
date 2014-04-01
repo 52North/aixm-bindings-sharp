@@ -44,57 +44,57 @@ namespace aixm_bindings_sharp
 	class Roundtrip
 	{
 
-		public static void Main(string[] args)
-		{
-            TimePeriodTryout tpt = null;
-            string fileInput;
-            string fileOutput;
-			if (args == null || args.Length == 0) 
-            {
-				throw new Exception("Input and Output file path's required.");
-			}
-            else
-            {
-                if (args.Length == 1)
-                {
-                    if (Directory.Exists(args[0]))
-                    {
-                        fileInput = args[0] + "\\"+ "navaid.xml";
-                        fileOutput = args[0] + "\\" + "navaid-re-cs.xml";
-
-                        tpt = new TimePeriodTryout(args[0]);
-                    }
-                    else
-                    {
-                        throw new Exception("Input path is not a valid directory.");
-                    }
-                }
-                else if (args.Length == 2)
-                {
-                    fileInput = args[0];
-                    fileOutput = args[1];
-                }
-                else
-                {
-                    throw new Exception("Input path is not a valid directory.");
-                }
-            }
-			
-			Console.WriteLine("Navaid roundtripping...!");
-
-            Stopwatch sw = new Stopwatch();
-            
-            GenericRoundtrip<NavaidType> rt = new GenericRoundtrip<NavaidType>();
-            rt.DoRoundtrip(fileInput, fileOutput);
-			
-			Console.WriteLine("Rondtrip complete! Took {0} milliseconds.", rt.ElapsedTime);
-            Thread.Sleep(2000);
-
-            if (tpt != null)
-            {
-                tpt.Test();
-            }
-		}
+//		public static void Main(string[] args)
+//		{
+//            TimePeriodTryout tpt = null;
+//            string fileInput;
+//            string fileOutput;
+//			if (args == null || args.Length == 0) 
+//            {
+//				throw new Exception("Input and Output file path's required.");
+//			}
+//            else
+//            {
+//                if (args.Length == 1)
+//                {
+//                    if (Directory.Exists(args[0]))
+//                    {
+//                        fileInput = args[0] + "\\"+ "navaid.xml";
+//                        fileOutput = args[0] + "\\" + "navaid-re-cs.xml";
+//
+//                        tpt = new TimePeriodTryout(args[0]);
+//                    }
+//                    else
+//                    {
+//                        throw new Exception("Input path is not a valid directory.");
+//                    }
+//                }
+//                else if (args.Length == 2)
+//                {
+//                    fileInput = args[0];
+//                    fileOutput = args[1];
+//                }
+//                else
+//                {
+//                    throw new Exception("Input path is not a valid directory.");
+//                }
+//            }
+//			
+//			Console.WriteLine("Navaid roundtripping...!");
+//
+//            Stopwatch sw = new Stopwatch();
+//            
+//            GenericRoundtrip<NavaidType> rt = new GenericRoundtrip<NavaidType>();
+//            rt.DoRoundtrip(fileInput, fileOutput);
+//			
+//			Console.WriteLine("Rondtrip complete! Took {0} milliseconds.", rt.ElapsedTime);
+//            Thread.Sleep(2000);
+//
+//            if (tpt != null)
+//            {
+//                tpt.Test();
+//            }
+//		}
 		
 
     }

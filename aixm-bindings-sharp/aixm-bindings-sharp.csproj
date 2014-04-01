@@ -76,6 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AIXM_Features.cs" />
+    <Compile Include="IGenericRoundtrip.cs" />
+    <Compile Include="PerformanceTest.cs" />
     <Compile Include="GenericRoundtrip.cs" />
     <Compile Include="Roundtrip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +85,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="xml\navaid.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+	<Content Include="xml\navaid1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+	<Content Include="xml\airspace1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+	<Content Include="xml\airport1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+	<Content Include="xml\routesegment1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="xml\timePeriod.xml">
@@ -122,7 +136,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="xml\airport1.xml" />
+    <None Include="xml\airspace1.xml" />
+    <None Include="xml\navaid1.xml" />
     <None Include="xml\navaidWithAbstractTime.xml" />
+    <None Include="xml\routesegment1.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
